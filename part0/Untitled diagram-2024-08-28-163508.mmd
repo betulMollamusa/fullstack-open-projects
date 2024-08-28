@@ -1,0 +1,13 @@
+sequenceDiagram
+    participant Kullanıcı
+    participant Tarayıcı
+    participant Sunucu
+
+    Kullanıcı ->> Tarayıcı: Notu Girer ve Formu Gönderir
+    Tarayıcı ->> Tarayıcı: Formun Varsayılan Davranışını Engeller (e.preventDefault())
+    Tarayıcı ->> Tarayıcı: Yeni Not Nesnesi Oluşturur\n{content: note, date: new Date()}
+    Tarayıcı ->> Tarayıcı: Notu Listeye Ekler (notes.push(note))
+    Tarayıcı ->> Tarayıcı: Notları Yeniden Çizer (redrawNotes())
+    Tarayıcı ->> Sunucu: HTTP POST /new_note_spa\nContent-Type: application/json\n{"content": "...", "date": "..."}
+    Sunucu ->> Tarayıcı: HTTP 201 Created\nNot Sunucuda Saklanır
+    Note over Tarayıcı: Sayfa Yenilenmez, Not Hemen Görüntülenir

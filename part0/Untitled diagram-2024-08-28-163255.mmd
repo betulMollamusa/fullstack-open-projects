@@ -1,0 +1,17 @@
+sequenceDiagram
+    participant Kullanıcı
+    participant Tarayıcı
+    participant Sunucu
+
+    Kullanıcı ->> Tarayıcı: Formdaki Notu Girer ve Gönder Butonuna Basar
+    Tarayıcı ->> Sunucu: HTTP POST /new_note
+    Sunucu ->> Sunucu: Yeni Notu Oluşturur\ncontent: req.body.note\ndate: new Date()
+    Sunucu ->> Tarayıcı: HTTP 302 Yönlendirme /notes
+    Tarayıcı ->> Sunucu: HTTP GET /notes
+    Sunucu ->> Tarayıcı: HTML Sayfasını Yükler
+    Tarayıcı ->> Sunucu: HTTP GET /main.css
+    Sunucu ->> Tarayıcı: CSS Dosyasını Yükler
+    Tarayıcı ->> Sunucu: HTTP GET /main.js
+    Sunucu ->> Tarayıcı: JavaScript Kodunu Yükler
+    Tarayıcı ->> Sunucu: HTTP GET /data.json
+    Sunucu ->> Tarayıcı: Notların Verisini Gönderir
